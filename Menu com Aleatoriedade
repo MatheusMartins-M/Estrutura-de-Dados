@@ -1,8 +1,9 @@
 import java.util.Scanner;
 import java.util.Random;
+
 public class Main {
     static Scanner teclado = new Scanner(System.in);
-    static int quantosValores = 0, quantidadeVetor = 5, comparadorBin = 0, comparadorSeq = 0;
+    static int quantosValores = 0, quantidadeVetor = 5, comparadorBin = 1, comparadorSeq = 1;
     static int [] vetor = new int[quantidadeVetor];
     public static void main(String[] args) {
 
@@ -22,7 +23,7 @@ public class Main {
                 case 7 -> falaMenor();
                 case 8 -> apresentaLista();
                 case 9 -> insereAleatorio();
-                case 10 -> comparaBinario();
+                case 10 -> consultaBinario();
                 case 11 -> comparaBuscas();
                 case 0 -> encerraPrograma();
                 default -> System.out.println("\nOpção inválida. Tente novamente\n");
@@ -48,19 +49,18 @@ public class Main {
         System.out.print("Escolha: ");
     }
     static void zeraVetor() {
-        System.out.println();
         for (int i = 0; i < quantidadeVetor; i++) {
             vetor[i] = 0;
         }
 
         quantosValores = 0;
-
+        System.out.println();
         System.out.println(">>>>>>> Vetor zerado com sucesso! <<<<<<");
         System.out.println();
 
     }
     static void insereValor() {
-        int i = 0;
+        int aux;
 
         if(quantosValores >= quantidadeVetor){
             System.out.println(">>>>>> Vetor completo <<<<<<");
@@ -68,18 +68,29 @@ public class Main {
 
         }else {
 
-            while(i < quantidadeVetor){
+            for(int i = 0; i < quantidadeVetor; i++){
                 if(vetor[i] != 0){
                     i++;
+                    quantosValores++;
+
                 }else{
+
                     System.out.println();
                     System.out.print("Digite o valor a ser inserido no vetor: ");
                     vetor[i] = teclado.nextInt();
                     i = quantidadeVetor;
+
                 }
+                quantosValores++;
             }
 
-            quantosValores++;
+            for(int i = 0; i < (quantidadeVetor - 1); i++) {
+                if (vetor[i] > vetor[i + 1]) {
+                    aux = vetor[i];
+                    vetor[i] = vetor[i + 1];
+                    vetor[i + 1] = aux;
+                }
+            }
 
             System.out.println();
         }
@@ -206,42 +217,52 @@ public class Main {
         System.out.println();
     }
     static void insereAleatorio(){
-        int i = 0;
+        int aux;
         Random numAleatorio = new Random();
         int aleatorio = numAleatorio.nextInt(10000);
 
         if(quantosValores >= quantidadeVetor){
+            System.out.println();
             System.out.println(">>>>>> Vetor completo <<<<<<");
             System.out.println();
 
         }else {
 
-            while (i < quantidadeVetor) {
+            for (int i = 0; i < quantidadeVetor; i++) {
                 if (vetor[i] != 0) {
                     i++;
                     quantosValores++;
 
                 } else {
 
-                    quantosValores--;
                     System.out.println();
                     System.out.println("O número aleatório foi adicionado!");
                     vetor[i] = aleatorio;
                     i = quantidadeVetor;
 
                 }
+                quantosValores++;
             }
 
-
-            System.out.println();
+            for (int i = 0; i < (quantidadeVetor - 1); i++) {
+                if (vetor[i] > vetor[i + 1]) {
+                    aux = vetor[i];
+                    vetor[i] = vetor[i + 1];
+                    vetor[i + 1] = aux;
+                }
+            }
         }
-    }
-    static void comparaBinario(){
-        int meio, fim, valorConsulta, anotar = -1;
-        fim = quantidadeVetor - 1;
 
         System.out.println();
-        System.out.print("Insira o valor a ser comparado: ");
+    }
+    static void consultaBinario(){
+        int meio, fim, valorConsulta, anotar, posicao;
+        fim = quantidadeVetor - 1;
+        anotar = -1;
+        posicao = -1;
+
+        System.out.println();
+        System.out.print("Insira o valor a ser consultado: ");
         valorConsulta = teclado.nextInt();
 
         for(int i = 0; i <= fim; i++){
@@ -250,6 +271,7 @@ public class Main {
             if(vetor[meio] == valorConsulta){
                 comparadorBin++;
                 anotar = 1;
+                posicao = i;
 
             }
 
@@ -265,7 +287,7 @@ public class Main {
         }
 
         if (anotar == 1) {
-            System.out.println("O valor foi cadastrado");
+            System.out.println("O valor foi cadastrado na posicao "+ posicao);
 
         } else {
 
@@ -275,8 +297,10 @@ public class Main {
         System.out.println();
     }
     static void comparaBuscas(){
+        System.out.println();
         System.out.println("A busca binária comparou "+ comparadorBin +" vezes");
         System.out.println("A busca sequencial comparou "+ comparadorSeq +" vezes");
+        System.out.println();
     }
     static void encerraPrograma() {
         System.out.println();
