@@ -8,9 +8,7 @@ public class Main {
     static int quantosValoresNoVetor = 0, tamanhoVetor = 5;
     static int comparadorBubble = 0, comparadorSelection = 0, comparadorInsert = 0, comparadorQuick = 0, comparadorBin = 0, comparadorSeq = 0, comparadorRecursivo = 0;
     static int [] vetor = new int[tamanhoVetor];
-    
     public static void main(String[] args) {
-
 
         int escolha = -1;
 
@@ -39,6 +37,7 @@ public class Main {
             }
         }
     }
+
     static void mostraMenu() {
         System.out.println("------------------------------------------------Menu------------------------------------------------");
         System.out.println("1) Criar o vetor vazio ou zerar o vetor");
@@ -49,16 +48,17 @@ public class Main {
         System.out.println("6) Consultar qual o maior valor armazenado no vetor e indicar qual o elemento que contém esse valor");
         System.out.println("7) Consultar qual o menor valor armazenado no vetor e indicar qual o elemento que contém esse valor");
         System.out.println("8) Apresentar uma listagem dos valores armazenados no vetor");
-        System.out.println("9) Inserir um número aleatório no vetor (ORDENADO)");
+        System.out.println("9) Inserir números aleatórios no vetor (ORDENADO)");
         System.out.println("10) Busca binária");
         System.out.println("11) Consulta comparando as buscas (binária, sequencial e binária com recursividade)");
         System.out.println("12) Busca com recursividade");
-        System.out.println("13) Insirir um número aleatório (NÃO ORDENADO)");
+        System.out.println("13) Insirir números aleatórios (NÃO ORDENADO)");
         System.out.println("14) Escolha o tipo de ordenação");
         System.out.println("0) Sair do programa");
         System.out.println("----------------------------------------------------------------------------------------------------");
         System.out.print("Escolha: ");
     }
+
     static void zeraVetor() {
         for (int i = 0; i < tamanhoVetor; i++) {
             vetor[i] = 0;
@@ -70,6 +70,7 @@ public class Main {
         System.out.println();
 
     }
+
     static void insereValor() {
         if(quantosValoresNoVetor >= tamanhoVetor){
             System.out.println(">>>>>> Vetor completo <<<<<<");
@@ -81,12 +82,13 @@ public class Main {
                 System.out.print("Digite o valor a ser inserido no vetor: ");
                 vetor[i] = teclado.nextInt();
 
-                }
+            }
 
             quantosValoresNoVetor++;
             System.out.println();
         }
     }
+
     static void apagaValor() {
         int valorZerado;
 
@@ -111,6 +113,7 @@ public class Main {
 
         }
     }
+
     static void consultaValor() {
         comparadorSeq = 0;
 
@@ -149,6 +152,7 @@ public class Main {
             System.out.println();
         }
     }
+
     static void informaQuantidade() {
         quantosValoresNoVetor = 0;
         for (int i = 0; i < tamanhoVetor; i++){
@@ -162,6 +166,7 @@ public class Main {
         System.out.println();
 
     }
+
     static void falaMaior() {
         int maiorValor, valorPosicao = -1;
         maiorValor = Integer.MIN_VALUE;
@@ -182,6 +187,7 @@ public class Main {
             System.out.println();
         }
     }
+
     static void falaMenor() {
         int menorValor, valorPosicao = -1;
         menorValor = Integer.MAX_VALUE;
@@ -202,6 +208,7 @@ public class Main {
             System.out.println();
         }
     }
+
     static void apresentaLista() {
         System.out.println();
         for (int i = 0; i < tamanhoVetor; i++) {
@@ -210,38 +217,29 @@ public class Main {
 
         System.out.println();
     }
+
     static void insereAleatorioOrdenado(){
-        int numeroAleatorio, aux, controle = 0;
 
         if(quantosValoresNoVetor >= tamanhoVetor){
             System.out.println();
             System.out.println(">>>>>> Vetor completo <<<<<<");
             System.out.println();
 
-        }else {
+        }else{
 
-            while(controle < tamanhoVetor){
-                numeroAleatorio = geraAleatorio();
-                vetor[controle] = numeroAleatorio;
+            vetor[0] = geraAleatorio();
 
-                quantosValoresNoVetor++;
-                controle++;
+            for(int i = 1; i < tamanhoVetor; i++){
+                vetor[i] = (geraAleatorio() + vetor[i - 1]);
             }
-            
-            for(int i = 0; i < tamanhoVetor - 1; i++){
-                if(vetor[i] > vetor[i + 1]){
-                    aux = vetor[i];
-                    vetor[i] = vetor[i + 1];
-                    vetor[i + 1] = aux;
-                }
-            }
-            
+
             System.out.println();
             System.out.println("Os números aleatórios foram adicionados!!!!");
             System.out.println();
-
         }
+
     }
+
     static void consultaBinario() {
         int inicio, fim, valorConsulta, posicao;
 
@@ -293,6 +291,7 @@ public class Main {
         System.out.println("A busca binária com recursividade comparou "+ comparadorRecursivo +" vezes");
         System.out.println();
     }
+
     static int buscaBinariaRecursiva (int[] valor, int consulta, int inicio, int fim) {
         int meio;
 
@@ -366,6 +365,7 @@ public class Main {
 
         System.out.println();
     }
+
     static void escolheOrdenacao(){
         int [] copia = new int[tamanhoVetor];
 
@@ -403,6 +403,7 @@ public class Main {
             System.out.println();
         }
     }
+
     static void bubbleSort(){
         int [] copia = new int[tamanhoVetor];
         int ultimo, aux;
@@ -430,6 +431,7 @@ public class Main {
 
         System.out.println();
     }
+
     static void selectionSort(){
         int [] copia = new int[tamanhoVetor];
         int menor, aux;
@@ -459,6 +461,7 @@ public class Main {
 
         System.out.println();
     }
+
     static void insertionSort(){
         int [] copia = new int[tamanhoVetor];
         int inicio, aux;
@@ -489,6 +492,7 @@ public class Main {
 
         System.out.println();
     }
+
     static void quickSort(int [] copia, int baixo, int alto){
         int pivo;
 
@@ -499,6 +503,7 @@ public class Main {
             quickSort(copia, baixo + 1, alto);
         }
     }
+
     static int participation(int [] copia, int baixo, int alto) {
         int pivo, aux, troca, subs;
         comparadorQuick = 0;
@@ -527,6 +532,7 @@ public class Main {
         return aux + 1;
 
     }
+
     static void menuOrdenacao() {
         System.out.println(">>>>>>>>>> Ordenação <<<<<<<<<<<");
         System.out.println("1) BubbleSort");
@@ -535,6 +541,7 @@ public class Main {
         System.out.println("4) QuickSort");
         System.out.print("Escolha: ");
     }
+
     static int geraAleatorio(){
         int numeroAleatorio;
 
@@ -542,6 +549,7 @@ public class Main {
 
         return numeroAleatorio;
     }
+
     static void verificaOrdenacao(){
         int controle = 0;
 
@@ -557,6 +565,7 @@ public class Main {
             ordenado = true;
         }
     }
+
     static void encerraPrograma() {
         System.out.println();
         System.out.println("Sistema encerrado");
